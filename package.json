@@ -24,6 +24,10 @@
     "src/*"
   ],
   "dependencies": {
+    "@types/chroma-js": "^2.1.3",
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^17.0.3",
+    "@types/react-native": "^0.64.2",
     "chroma-js": "^2.1.0",
     "expo-linear-gradient": "^8.0.0"
   },

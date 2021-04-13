@@ -6,14 +6,69 @@ import {
   ViewPropTypes,
   PanResponder,
   StyleSheet,
+  PanResponderInstance,
+  StyleProp,
+  ViewStyle,
+  PanResponderGestureState,
+  GestureResponderEvent,
+  NativeTouchEvent,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import PropTypes from 'prop-types';
 import chroma from 'chroma-js';
 import normalizeValue from './utils';
 
-export default class HuePicker extends Component {
-  constructor(props) {
+type DragEventNames = 'onDragStart'|'onDragMove'|'onDragEnd'|'onDragTerminate';
+export type HuePickerDragCallback = (arg: {hue: number, gestureState: PanResponderGestureState})=>void;
+export type HuePickerPressCallback = (arg: {hue: number, nativeEvent: NativeTouchEvent})=>void;
+export type HuePickerProps = {
+    containerStyle: StyleProp<ViewStyle>,
+    borderRadius: number,
+    hue: number,
+    barWidth: number,
+    barHeight: number,
+    sliderSize: number,
+    onDragStart: HuePickerDragCallback|null,
+    onDragMove: HuePickerDragCallback|null,
+    onDragEnd: HuePickerDragCallback|null,
+    onDragTerminate: HuePickerDragCallback|null,
+    onPress: HuePickerPressCallback|null,
+}
+export default class HuePicker extends Component<HuePickerProps> {
+  sliderY: Animated.Value;
+  panResponder: PanResponderInstance;
+  hueColors: string[];
+  dragStartValue?: number;
+
+  static propTypes = {
+    containerStyle: ViewPropTypes.style,
+    borderRadius: PropTypes.number,
+    hue: PropTypes.number,
+    barWidth: PropTypes.number,
+    barHeight: PropTypes.number,
+    sliderSize: PropTypes.number,
+    onDragStart: PropTypes.func,
+    onDragMove: PropTypes.func,
+    onDragEnd: PropTypes.func,
+    onDragTerminate: PropTypes.func,
+    onPress: PropTypes.func,
+  };
+
+  static defaultProps = {
+    containerStyle: {},
+    borderRadius: 0,
+    hue: 0,
+    barWidth: 12,
+    barHeight: 200,
+    sliderSize: 24,
+    onDragStart: null,
+    onDragMove: null,
+    onDragEnd: null,
+    onDragTerminate: null,
+    onPress: null,
+  };  
+
+  constructor(props: HuePickerProps) {
     super(props);
     this.hueColors = [
       '#ff0000',
@@ -50,7 +105,7 @@ export default class HuePicker extends Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: HuePickerProps) {
     const { hue, barHeight } = this.props;
     if (
       prevProps.hue !== hue
@@ -81,16 +136,16 @@ export default class HuePicker extends Component {
     return chroma.hsl(hue, 1, 0.5).hex();
   }
 
-  computeHueValueDrag(gestureState) {
+  computeHueValueDrag(gestureState: PanResponderGestureState) {
     const { dy } = gestureState;
     const { barHeight } = this.props;
-    const { dragStartValue } = this;
+    const { dragStartValue = 0 } = this;
     const diff = dy / barHeight;
     const updatedHue = normalizeValue(dragStartValue / 360 + diff) * 360;
     return updatedHue;
   }
 
-  computeHueValuePress(event) {
+  computeHueValuePress(event: GestureResponderEvent) {
     const { nativeEvent } = event;
     const { locationY } = nativeEvent;
     const { barHeight } = this.props;
@@ -98,7 +153,7 @@ export default class HuePicker extends Component {
     return updatedHue;
   }
 
-  fireDragEvent(eventName, gestureState) {
+  fireDragEvent(eventName: DragEventNames, gestureState: PanResponderGestureState) {
     const { [eventName]: event } = this.props;
     if (event) {
       event({
@@ -108,7 +163,7 @@ export default class HuePicker extends Component {
     }
   }
 
-  firePressEvent(event) {
+  firePressEvent(event: GestureResponderEvent) {
     const { onPress } = this.props;
     if (onPress) {
       onPress({
@@ -173,31 +228,3 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
   },
 });
-
-HuePicker.propTypes = {
-  containerStyle: ViewPropTypes.style,
-  borderRadius: PropTypes.number,
-  hue: PropTypes.number,
-  barWidth: PropTypes.number,
-  barHeight: PropTypes.number,
-  sliderSize: PropTypes.number,
-  onDragStart: PropTypes.func,
-  onDragMove: PropTypes.func,
-  onDragEnd: PropTypes.func,
-  onDragTerminate: PropTypes.func,
-  onPress: PropTypes.func,
-};
-
-HuePicker.defaultProps = {
-  containerStyle: {},
-  borderRadius: 0,
-  hue: 0,
-  barWidth: 12,
-  barHeight: 200,
-  sliderSize: 24,
-  onDragStart: null,
-  onDragMove: null,
-  onDragEnd: null,
-  onDragTerminate: null,
-  onPress: null,
-};

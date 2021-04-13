@@ -5,14 +5,72 @@ import {
   ViewPropTypes,
   PanResponder,
   StyleSheet,
+  PanResponderInstance,
+  StyleProp,
+  ViewStyle,
+  PanResponderGestureState,
+  NativeTouchEvent,
+  GestureResponderEvent,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import PropTypes from 'prop-types';
 import chroma from 'chroma-js';
 import normalizeValue from './utils';
 
-export default class SaturationValuePicker extends Component {
-  constructor(props) {
+type DragEventNames = 'onDragStart' | 'onDragMove' | 'onDragEnd' | 'onDragTerminate';
+export type SaturationValuePickerDragCallback = (arg: { saturation: number, value: number, gestureState: PanResponderGestureState }) => void
+export type SaturationValuePickerPressCallback = (arg: { saturation: number, value: number, nativeEvent: NativeTouchEvent }) => void;
+export type SaturationValuePickerProps = {
+  containerStyle: StyleProp<ViewStyle>,
+  borderRadius: number,
+  size: number,
+  sliderSize: number,
+  hue: number,
+  saturation: number,
+  value: number,
+  onDragStart: SaturationValuePickerDragCallback | null,
+  onDragMove: SaturationValuePickerDragCallback | null,
+  onDragEnd: SaturationValuePickerDragCallback | null,
+  onDragTerminate: SaturationValuePickerDragCallback | null,
+  onPress: SaturationValuePickerPressCallback | null,
+}
+export default class SaturationValuePicker extends Component<SaturationValuePickerProps> {
+  panResponder: PanResponderInstance;
+  dragStartValue?: {
+    saturation: number,
+    value: number
+  };
+
+  static propTypes = {
+    containerStyle: ViewPropTypes.style,
+    borderRadius: PropTypes.number,
+    size: PropTypes.number,
+    sliderSize: PropTypes.number,
+    hue: PropTypes.number,
+    saturation: PropTypes.number,
+    value: PropTypes.number,
+    onDragStart: PropTypes.func,
+    onDragMove: PropTypes.func,
+    onDragEnd: PropTypes.func,
+    onDragTerminate: PropTypes.func,
+    onPress: PropTypes.func,
+  };
+  static defaultProps = {
+    containerStyle: {},
+    borderRadius: 0,
+    size: 200,
+    sliderSize: 24,
+    hue: 0,
+    saturation: 1,
+    value: 1,
+    onDragStart: null,
+    onDragMove: null,
+    onDragEnd: null,
+    onDragTerminate: null,
+    onPress: null,
+  };
+
+  constructor(props: SaturationValuePickerProps) {
     super(props);
     this.firePressEvent = this.firePressEvent.bind(this);
     this.panResponder = PanResponder.create({
@@ -51,10 +109,10 @@ export default class SaturationValuePicker extends Component {
     ).hex();
   }
 
-  computeSatValDrag(gestureState) {
+  computeSatValDrag(gestureState: PanResponderGestureState) {
     const { dx, dy } = gestureState;
     const { size } = this.props;
-    const { saturation, value } = this.dragStartValue;
+    const { saturation = 0, value = 0 } = this.dragStartValue || {};
     const diffx = dx / size;
     const diffy = dy / size;
     return {
@@ -63,7 +121,7 @@ export default class SaturationValuePicker extends Component {
     };
   }
 
-  computeSatValPress(event) {
+  computeSatValPress(event: GestureResponderEvent) {
     const { nativeEvent } = event;
     const { locationX, locationY } = nativeEvent;
     const { size } = this.props;
@@ -73,7 +131,7 @@ export default class SaturationValuePicker extends Component {
     };
   }
 
-  fireDragEvent(eventName, gestureState) {
+  fireDragEvent(eventName: DragEventNames, gestureState: PanResponderGestureState) {
     const { [eventName]: event } = this.props;
     if (event) {
       event({
@@ -83,7 +141,7 @@ export default class SaturationValuePicker extends Component {
     }
   }
 
-  firePressEvent(event) {
+  firePressEvent(event: GestureResponderEvent) {
     const { onPress } = this.props;
     if (onPress) {
       onPress({
@@ -176,33 +234,3 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 });
-
-SaturationValuePicker.propTypes = {
-  containerStyle: ViewPropTypes.style,
-  borderRadius: PropTypes.number,
-  size: PropTypes.number,
-  sliderSize: PropTypes.number,
-  hue: PropTypes.number,
-  saturation: PropTypes.number,
-  value: PropTypes.number,
-  onDragStart: PropTypes.func,
-  onDragMove: PropTypes.func,
-  onDragEnd: PropTypes.func,
-  onDragTerminate: PropTypes.func,
-  onPress: PropTypes.func,
-};
-
-SaturationValuePicker.defaultProps = {
-  containerStyle: {},
-  borderRadius: 0,
-  size: 200,
-  sliderSize: 24,
-  hue: 0,
-  saturation: 1,
-  value: 1,
-  onDragStart: null,
-  onDragMove: null,
-  onDragEnd: null,
-  onDragTerminate: null,
-  onPress: null,
-};
