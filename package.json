@@ -2,14 +2,14 @@
   "name": "react-native-hsv-color-picker",
   "version": "1.0.2",
   "description": "a react native HSV(hue, saturation, value) color picker",
-  "author": "Yuan Fu",
+  "author": "Yuan Fu, edited by Switt Kongdachalert",
   "bugs": {
-    "url": "https://github.com/yuanfux/react-native-hsv-color-picker/issues"
+    "url": "https://github.com/swittk/react-native-hsv-color-picker/issues"
   },
-  "homepage": "https://github.com/yuanfux/react-native-hsv-color-picker",
+  "homepage": "https://github.com/swittk/react-native-hsv-color-picker",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yuanfux/react-native-hsv-color-picker.git"
+    "url": "https://github.com/swittk/react-native-hsv-color-picker.git"
   },
   "keywords": [
     "react native",
@@ -38,11 +38,7 @@
     "@babel/core": "^7.2.2",
     "@babel/runtime": "^7.3.1",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^24.0.0",
     "babel-preset-expo": "~8.0.0",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "enzyme-to-json": "^3.3.5",
     "escape-regex-string": "^1.0.6",
     "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -52,9 +48,6 @@
     "eslint-plugin-react-native": "^3.6.0",
     "expo": "~36.0.0",
     "expo-keep-awake": "^8.0.0",
-    "jest": "^24.0.0",
-    "jest-enzyme": "^7.0.2",
-    "jest-expo": "^36.0.1",
     "jsdom": "^15.1.1",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
@@ -65,19 +58,6 @@
     "eject": "npx expo-cli eject --config \"./demo/app.json\"",
     "test:lint": "npx eslint \"src/*.js\"",
     "test": "npm run test:lint && npx jest"
-  },
-  "jest": {
-    "preset": "jest-expo",
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/setup-tests.js"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/demo/"
-    ],
-    "collectCoverage": true
   },
   "license": "MIT"
 }
