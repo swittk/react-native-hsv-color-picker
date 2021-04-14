@@ -1,12 +1,11 @@
 
-# react-native-hsv-color-picker
+# react-native-hsv-picker
 > a react native HSV(hue, saturation, value) color picker
 
+Originally authored by Yuan Fu [react-native-hsv-color-picker](https://github.com/yuanfux/react-native-hsv-color-picker)
 Forked and converted to TypeScript : 04/2021
 
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
-
-![npm](https://img.shields.io/npm/v/react-native-hsv-color-picker.svg?style=flat-square) ![](https://img.shields.io/travis/yuanfux/react-native-hsv-color-picker/master.svg?style=flat-square) ![GitHub issues](https://img.shields.io/github/issues/yuanfux/react-native-hsv-color-picker.svg?style=flat-square) ![NPM](https://img.shields.io/npm/l/react-native-hsv-color-picker.svg?style=flat-square) ![](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square) ![](https://img.shields.io/maintenance/yes/2021.svg?style=flat-square)
 
 <p align="center">
   <img width="300" src="https://user-images.githubusercontent.com/6414178/53297993-aef84480-3861-11e9-99ad-b957639414fa.gif">
@@ -25,23 +24,25 @@ Highlighted Features:
 
 ## Install
 ```bash
-$ npm install react-native-hsv-color-picker --save
+$ npm install react-native-hsv-picker --save
 ```
 
 ### Use with Expo Project
 > You are all set.
 
 ### Use with React Native Project
-> `react-native-hsv-color-picker` is powered by the lib [`expo-linear-gradient`](https://github.com/react-native-community/react-native-linear-gradient). Besides above command, you have to follow this [Instruction](https://github.com/expo/expo/tree/master/packages/expo-linear-gradient#installation-in-bare-react-native-projects) to add relevant dependencies to your project.
+> `react-native-hsv-picker` is powered by [`expo-linear-gradient`](https://github.com/react-native-community/react-native-linear-gradient). If you're not using a Managed Expo project, you have to follow [these instructions](https://github.com/expo/expo/tree/master/packages/expo-linear-gradient#installation-in-bare-react-native-projects) to properly install it.
 
 ## Usage
 > a minimally-configured HSV color picker
-```js
+```tsx
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import HsvColorPicker from 'react-native-hsv-color-picker';
 
-export default class Example extends React.Component {
+type ExampleProps = {}; 
+type ExampleState = {hue: number, sat: number, val: number };
+export default class Example extends React.Component<ExampleProps, ExampleState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,14 +54,14 @@ export default class Example extends React.Component {
     this.onHuePickerChange = this.onHuePickerChange.bind(this);
   }
 
-  onSatValPickerChange({ saturation, value }) {
+  onSatValPickerChange({ saturation, value }: { saturation: number, value: number }) {
     this.setState({
       sat: saturation,
       val: value,
     });
   }
 
-  onHuePickerChange({ hue }) {
+  onHuePickerChange({ hue }: { hue: number }) {
     this.setState({
       hue,
     });
@@ -100,14 +101,14 @@ const styles = StyleSheet.create({
 #### Basic Props
 | Prop | Type | Default | Description |
 |--|--|--| -- |
-| `containerStyle` | ViewPropTypes.style  | `{}` |  style for the outmost container  |
-| `huePickerContainerStyle` | ViewPropTypes.style  | `{}` |  style for the hue picker container  |
+| `containerStyle` | StyleProp<ViewStyle>  | `{}` |  style for the outmost container  |
+| `huePickerContainerStyle` | StyleProp<ViewStyle>  | `{}` |  style for the hue picker container  |
 | `huePickerBorderRadius` | number  | `0` | border radius for the hue picker  |
 | `huePickerHue` | number  | `0` | hue value(`h` in `hsv`, ranged in `[0, 360]`) for the hue picker |
 | `huePickerBarWidth` | number  | `12` | bar width for the hue picker  |
 | `huePickerBarHeight` | number  | `200` | bar height for the hue picker  |
 | `huePickerSliderSize` | number  | `24` | slider diameter for the hue picker |
-| `satValPickerContainerStyle` | ViewPropTypes.style  | `{}` | style for the saturation & value picker container   |
+| `satValPickerContainerStyle` | StyleProp<ViewStyle>  | `{}` | style for the saturation & value picker container   |
 | `satValPickerBorderRadius` | number  | `0` | border radius for the saturation & value picker  |
 | `satValPickerSize` | number  | `200` | width / height for the saturation & value picker  |
 | `satValPickerSliderSize` | number  | `24` | slider diameter for the saturation & value picker  |
@@ -140,31 +141,10 @@ const styles = StyleSheet.create({
 
 
 ## Dev
-> The `demo` folder contains a standalone Expo project, which can be used for dev purpose.
+> The `demo` folder contains a standalone Expo project, which can be used for dev purposes.
 
-> react-native - 0.61 <br />
-> react - 16.9
-
-1. Start Expo
-	```bash
-	$ npm install
-
-	$ npm start
-	```
-
-2. Run on `simulator`
-	- type the following command in the `Terminal` after the project is booted up
-	- `a` for `android` simulator
-	- `i` for `iOS` simulator
-
-3. Run on `device`
-	- require the installation of corresponding [`iOS client`](https://itunes.apple.com/app/apple-store/id982107779) or [`android client`](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www) on the device
-	- scan the QR code from `Terminal` using the device
-
-4. More on [`Expo Guide`](https://docs.expo.io/versions/v36.0.0/)
-
-## Related
-- scaffolded by [**react-native-component-cli**](https://github.com/yuanfux/react-native-component-cli) 
+> react-native - 0.63 <br />
+> react - 16.13
 
 ## License
 MIT
