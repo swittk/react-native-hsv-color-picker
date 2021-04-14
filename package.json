@@ -53,9 +53,9 @@
     "start": "npx expo-cli start --config \"./demo/app.json\" -c",
     "eject": "npx expo-cli eject --config \"./demo/app.json\"",
     "build": "tsc",
-    "prepare" : "npm run build",
-    "version" : "git add -A src",
-    "postversion" : "git push && git push --tags"
+    "prepare": "npm run build",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "license": "MIT"
 }

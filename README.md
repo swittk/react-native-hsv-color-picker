@@ -14,7 +14,7 @@ Forked and converted to TypeScript : 04/2021
 ## Preview
 [View Live Demo](https://snack.expo.io/@fuyuanx/react-native-hsv-color-picker)
 
-`react-native-hsv-color-picker` is a React Native component for building an [HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) (hue, saturation, value) color picker. 
+`react-native-hsv-picker` is a React Native component for selection of an [HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) (hue, saturation, value) color value. 
 
 Highlighted Features:
 1. **Real Rendering** - no image involved / all colors are truly rendered
@@ -38,7 +38,7 @@ $ npm install react-native-hsv-picker --save
 ```tsx
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import HsvColorPicker from 'react-native-hsv-color-picker';
+import HsvColorPicker from 'react-native-hsv-picker';
 
 type ExampleProps = {}; 
 type ExampleState = {hue: number, sat: number, val: number };
