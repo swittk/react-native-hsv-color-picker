@@ -1,8 +1,8 @@
 {
-  "name": "react-native-hsv-color-picker",
-  "version": "1.0.2",
-  "description": "a react native HSV(hue, saturation, value) color picker",
-  "author": "Yuan Fu, edited by Switt Kongdachalert",
+  "name": "react-native-hsv-picker",
+  "version": "1.1.0",
+  "description": "A React-Native HSV (Hue, Saturation & Value) color picker",
+  "author": "Switt Kongdachalert",
   "bugs": {
     "url": "https://github.com/swittk/react-native-hsv-color-picker/issues"
   },
@@ -17,11 +17,13 @@
     "color",
     "picker",
     "color picker",
+    "hsv",
     "hsv color picker"
   ],
-  "main": "src/index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "src/*"
+    "lib/**/*"
   ],
   "dependencies": {
     "@types/chroma-js": "^2.1.3",
@@ -44,11 +46,16 @@
     "expo-keep-awake": "^8.0.0",
     "react": "~16.13.1",
     "react-dom": "~16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "typescript": "~4.0.0"
   },
   "scripts": {
     "start": "npx expo-cli start --config \"./demo/app.json\" -c",
-    "eject": "npx expo-cli eject --config \"./demo/app.json\""
+    "eject": "npx expo-cli eject --config \"./demo/app.json\"",
+    "build": "tsc",
+    "prepare" : "npm run build",
+    "version" : "git add -A src",
+    "postversion" : "git push && git push --tags"
   },
   "license": "MIT"
 }

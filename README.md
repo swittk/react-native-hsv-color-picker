@@ -2,6 +2,10 @@
 # react-native-hsv-color-picker
 > a react native HSV(hue, saturation, value) color picker
 
+Forked and converted to TypeScript : 04/2021
+
+[![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
+
 ![npm](https://img.shields.io/npm/v/react-native-hsv-color-picker.svg?style=flat-square) ![](https://img.shields.io/travis/yuanfux/react-native-hsv-color-picker/master.svg?style=flat-square) ![GitHub issues](https://img.shields.io/github/issues/yuanfux/react-native-hsv-color-picker.svg?style=flat-square) ![NPM](https://img.shields.io/npm/l/react-native-hsv-color-picker.svg?style=flat-square) ![](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square) ![](https://img.shields.io/maintenance/yes/2021.svg?style=flat-square)
 
 <p align="center">

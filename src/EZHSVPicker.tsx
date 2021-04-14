@@ -5,7 +5,8 @@ import HsvColorPicker from "./HsvColorPicker";
 const nullFn = () => { };
 type EZHSVPickerProps = {
   onChangeHSV?: (arg: { h: number, s: number, v: number }) => void,
-  initialColor?: string
+  initialHexColor?: string,
+  initialHSV?: { h: number, s: number, v: number };
 };
 type EZHSVPickerState = {
   h: number,
@@ -16,13 +17,16 @@ export class EZHSVPicker extends React.PureComponent<EZHSVPickerProps, EZHSVPick
   hsvColorPicker = React.createRef<HsvColorPicker>();
   constructor(props: EZHSVPickerProps) {
     super(props);
-    const { initialColor } = props;
+    const { initialHexColor, initialHSV } = props;
     let h: number, s: number, v: number;
-    if (initialColor) {
-      [h, s, v] = chroma(initialColor).hsv();
-      if(isNaN(h)) h = 0;
-      if(isNaN(s)) s = 0;
-      if(isNaN(v)) v = 0;
+    if (initialHSV) {
+      ({ h, s, v } = initialHSV);
+    }
+    else if (initialHexColor) {
+      [h, s, v] = chroma(initialHexColor).hsv();
+      if (isNaN(h)) h = 0;
+      if (isNaN(s)) s = 0;
+      if (isNaN(v)) v = 0;
     }
     else {
       [h, s, v] = [0, 0, 0];

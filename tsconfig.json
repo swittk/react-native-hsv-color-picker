@@ -10,12 +10,19 @@
       "DOM"
     ],
     "moduleResolution": "node",
-    "noEmit": true,
-    "strict": true,
-    "target": "esnext",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+
+    "target": "es5",
+    "module": "CommonJS",
+    "declaration": true,
+    "outDir": "./lib",
+    "strict": true
   },
+  "include": ["src"],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "demo",
+    "babel.config.js"
   ]
 }
