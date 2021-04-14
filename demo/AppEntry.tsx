@@ -7,4 +7,4 @@ if (__DEV__) {
   activateKeepAwake();
 }
 
-registerRootComponent(App);
+registerRootComponent(App as any);

@@ -2,8 +2,15 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import HsvColorPicker from '../src';
 
-export default class App extends React.Component {
-  constructor(props) {
+type AppProps = {}
+type AppState = {
+  hue: number,
+  sat: number,
+  val: number
+}
+export default class App extends React.Component<AppProps, AppState> {
+  hsvColorPicker = React.createRef<HsvColorPicker>();
+  constructor(props: AppProps) {
     super(props);
     this.state = {
       hue: 0,
@@ -12,17 +19,16 @@ export default class App extends React.Component {
     };
     this.onSatValPickerChange = this.onSatValPickerChange.bind(this);
     this.onHuePickerChange = this.onHuePickerChange.bind(this);
-    this.hsvColorPicker = React.createRef();
   }
 
-  onSatValPickerChange({ saturation, value }) {
+  onSatValPickerChange({saturation, value}: { saturation: number, value: number }) {
     this.setState({
       sat: saturation,
       val: value,
     });
   }
 
-  onHuePickerChange({ hue }) {
+  onHuePickerChange({hue}:{ hue: number }) {
     this.setState({
       hue,
     });

@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "react-native-demo-app",
-    "slug": "react-native-demo-app",
+    "name": "react-native-hsv-demo",
+    "slug": "react-native-hsv-demo",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
-    "entryPoint": "demo/AppEntry.js",
+    "sdkVersion": "40.0.0",
+    "entryPoint": "demo/AppEntry",
     "platforms": [
       "ios",
       "android"
