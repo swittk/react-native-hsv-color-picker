@@ -12,7 +12,8 @@ Forked and converted to TypeScript : 04/2021
 </p>
 
 ## Preview
-[View Live Demo](https://snack.expo.io/@fuyuanx/react-native-hsv-color-picker)
+[View Live Demo](https://snack.expo.io/@switt/react-native-hsv-picker)
+Note : Due to some weirdness with prop-types, the web snack isn't working. It will work on your device though ;)
 
 `react-native-hsv-picker` is a React Native component for selection of an [HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) (hue, saturation, value) color value. 
 
