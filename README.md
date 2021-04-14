@@ -13,7 +13,7 @@ Forked and converted to TypeScript : 04/2021
 
 ## Preview
 [View Live Demo](https://snack.expo.io/@switt/react-native-hsv-picker)
-Note : Due to some weirdness with prop-types, the web snack isn't working. It will work on your device though ;)
+- Note : Due to some weirdness with prop-types, the web snack isn't working. It will work on your device though ;)
 
 `react-native-hsv-picker` is a React Native component for selection of an [HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) (hue, saturation, value) color value. 
 
@@ -25,7 +25,7 @@ Highlighted Features:
 
 ## Install
 ```bash
-$ npm install react-native-hsv-picker --save
+$ npm install react-native-hsv-picker
 ```
 
 ### Use with Expo Project
@@ -44,7 +44,7 @@ import HsvColorPicker from 'react-native-hsv-picker';
 type ExampleProps = {}; 
 type ExampleState = {hue: number, sat: number, val: number };
 export default class Example extends React.Component<ExampleProps, ExampleState> {
-  constructor(props) {
+  constructor(props: ExampleProps) {
     super(props);
     this.state = {
       hue: 0,
@@ -149,3 +149,19 @@ const styles = StyleSheet.create({
 
 ## License
 MIT
+
+
+---
+## Tip Jar
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Stellar_Symbol.png" alt="Stellar" height="32"/>
+```
+Stellar Lumens (XLM) : 
+GCVKPZQUDXWVNPIIMF3FXR6KWAOHTEWPZZM2AQE4J3TXR6ZDHXQHP5BQ
+```
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Coin-ada-big.svg" alt="Cardano" height="32">
+```
+Cardano (ADA) : 
+addr1q9datt8urnyuc2059tquh59sva0pja7jqg4nfhnje7xcy6zpndeesglqkxhjvcgdu820flcecjzunwp6qen4yr92gm6smssug8
+```
